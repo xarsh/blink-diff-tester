@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  h3 Blink diff tester
+  
+  h5 Output
+  img(v-bind:src="imageURL" height="379")
+    
+  h5 Parameters
+  form.container
+    .row
+      .container
+        label thresholdType
+        input#pixel(type='radio' value="pixel" v-model="opts.thresholdType")
+        label.label-inline(for="pixel") pixel
+        input#percent(type='radio' value="percent" v-model="opts.thresholdType")
+        label.label-inline(for="percent") percent
+        label threshold
+        input(type="range" max="1000" min="0.0" step="0.01" lazy v-model="opts.threshold")
+        output {{ opts.threshold }}
+        label delta
+        input(type="range" max="255" min="0.0" step="0.01" lazy v-model="opts.delta")
+        output {{ opts.delta }}
+      .container
+        each item in ['gammaR', 'gammaG', 'gammaB']
+          label= item
+          input(type="range" max="1.0" min="0" step="0.01" lazy v-model="opts.#{item}")
+          output {{ opts.#{item} }}
+      .container
+        label hideShift
+        input(type="checkbox" v-model="opts.hideShift")
+        label hShift
+        input(type="range" max="10" min="0" lazy v-model="opts.vShift")
+        output {{ opts.vShift }}
+        label vShift
+        input(type="range" max="10" min="0" lazy v-model="opts.hShift")
+        output {{ opts.hShift }}
+        
+    .row
+      .container
+        each item in ['outputMaskRed', 'outputMaskGreen', 'outputMaskBlue', 'outputMaskAlpha']
+          label= item 
+          input(type="range" max="255" min="0" lazy v-model="opts.#{item}")
+          output {{ opts.#{item} }}
+        label outputMaskOpacity
+        input(type="range" max="1.0" min="0" step="0.01" lazy v-model="opts.outputMaskOpacity")
+        output {{ opts.outputMaskRed }}
+      .container
+        each item in ['outputShiftRed', 'outputShiftGreen', 'outputShiftBlue', 'outputMaskAlpha']
+          label= item 
+          input(type="range" max="255" min="0" lazy v-model="opts.#{item}")
+          output {{ opts.#{item} }}
+        label outputShiftOpacity
+        input(type="range" max="1.0" min="0" step="0.01" lazy v-model="opts.outputShiftOpacity")
+        output {{ opts.outputShiftOpacity }}
+      .container
+        each item in ['outputBackgroundRed', 'outputBackgroundGreen', 'outputBackgroundBlue', 'outputBackgroundAlpha']
+          label= item 
+          input(type="range" max="255" min="0" lazy v-model="opts.#{item}")
+          output {{ opts.#{item} }}
+        label outputBackgroundOpacity
+        input(type="range" max="1.0" min="0" step="0.01" lazy v-model="opts.outputBackgroundOpacity")
+        output {{ opts.outputBackgroundOpacity }}
+
+  .center: a.button(v-on:click="reset") reset
+    
+  footer.center: small= "Takao NAITO <naito@sorapixels.com>"
