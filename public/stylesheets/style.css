@@ -19,5 +19,5 @@ input + output {
   text-align: center;
 }
 input[type="range"] {
-  width: 80%;
+  width: 70%;
 }
